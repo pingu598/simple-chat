@@ -3,11 +3,30 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux';
+import reducers from './reducers'
+import setupSocket from './sockets/index'
+import createSagaMiddleware from 'redux-saga'
+import handleNewMessage from './sagas'
+import {name} from './utils/name'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+const sagaMiddleware = createSagaMiddleware()
+
+
+const store = createStore(
+  reducers,
+  applyMiddleware(sagaMiddleware)
+)
+
+const socket = setupSocket(store.dispatch, name) //TODO
+sagaMiddleware.run(handleNewMessage, { socket, username: name})
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
