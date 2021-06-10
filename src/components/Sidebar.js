@@ -7,7 +7,7 @@ const UserList = () => {
         <h4 style={{color: 'white'}}>Users: </h4>
         <ul className="userlistCut">
             {users.map((user, index) =>
-                <h4>
+                <h4 className="userbox">
                 <Badge pill variant="primary">
                 {user.user}
               </Badge> 

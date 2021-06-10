@@ -44,6 +44,9 @@
   color: white;
 
 }
+.userbox {
+  margin-right: 20px;
+}
 .userlistCut {
   height: 200px;
   overflow:hidden; 
